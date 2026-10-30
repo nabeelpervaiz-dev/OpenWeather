@@ -44,7 +44,7 @@ useEffect(()=>{
 
 
   return (
-  <div className="min-h-screen bg-[#f4f3ef] flex items-center justify-center p-4 sm:p-8">
+  <div className="min-h-screen bg-[#f4f3ef] flex items-center justify-center  sm:p-6">
 
     {/* Main Card */}
     <div className="w-full max-w-4xl min-h-[75vh] bg-white rounded-2xl border border-gray-200 p-6 sm:p-10 flex flex-col shadow-sm">
