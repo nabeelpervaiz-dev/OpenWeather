@@ -6,9 +6,11 @@ import Card from './components/Card'
 function App() {
   const [City , setCity] = useState("Lahore")
   const [Data, setData] = useState(null)
+  const [loading, setloading] = useState(false)
 
 const API=`https://api.openweathermap.org/data/2.5/weather?q=${City}&appid=02643a3a80ac39918bd29f3b360a0592&units=metri`
 const FetchWeather = async ()=>{
+  setloading(true)
    try {
       const response = await axios.get(API);
       if(response.data==null){
@@ -19,6 +21,8 @@ const FetchWeather = async ()=>{
 
    } catch (error) {
     console.log(error)
+   }finally{
+    setloading(false)
    }
 
 
@@ -38,16 +42,28 @@ useEffect(()=>{
   
 
   if (!Data) {
-     return <div className='h-screen w-full '>Loading data...</div> 
+     return  (   
+     <div className="flex flex-col items-center justify-center py-16">
+
+      {/* Spinner */}
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-red-500"></div>
+
+      <p className="mt-5 text-sm font-medium text-gray-500 animate-pulse">
+        Fetching weather...
+      </p>
+
+    </div>
+  );
+
      }
  
 
 
   return (
-  <div className="min-h-screen bg-[#f4f3ef] flex items-center justify-center  sm:p-6">
+  <div className="min-h-screen bg-gray-400 flex items-center justify-center ">
 
     {/* Main Card */}
-    <div className="w-full max-w-4xl min-h-[75vh] bg-white rounded-2xl border border-gray-200 p-6 sm:p-10 flex flex-col shadow-sm">
+    <div className="w-full max-w-4xl min-h-[75vh] bg-white rounded-2xl border border-gray-200 p-2 pt-10 flex flex-col shadow-sm">
 
       {/* Search Bar */}
       <div className="input_feild mb-8">
@@ -76,8 +92,23 @@ useEffect(()=>{
           </button>
         </form>
       </div>
+   
+  {loading? (
+<div className="flex flex-col items-center justify-center py-16">
 
-      <Card Data={Data} />
+      {/* Spinner */}
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-red-500"></div>
+
+      <p className="mt-5 text-sm font-medium text-gray-500 animate-pulse">
+        Fetching weather...
+      </p>
+
+    </div>
+) : Data ? (
+  <Card Data={Data} />
+) : null}
+
+    
 
     </div>
   </div>

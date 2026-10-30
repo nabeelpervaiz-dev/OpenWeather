@@ -2,9 +2,6 @@ import React from 'react'
 
 const Card = ({Data}) => {
 
-    if (!Data) {
-     return <div className='h-screen w-full '>Loading data...</div> 
-     }
 
  return (
   <div className="Content rounded-2xl bg-white p-6 shadow-lg sm:p-8">
