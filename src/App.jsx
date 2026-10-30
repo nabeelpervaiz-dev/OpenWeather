@@ -7,10 +7,12 @@ function App() {
   const [City , setCity] = useState("Lahore")
   const [Data, setData] = useState(null)
   const [loading, setloading] = useState(false)
+  const [Error, setError] = useState("");
 
 const API=`https://api.openweathermap.org/data/2.5/weather?q=${City}&appid=02643a3a80ac39918bd29f3b360a0592&units=metri`
 const FetchWeather = async ()=>{
   setloading(true)
+  setError("")
    try {
       const response = await axios.get(API);
       if(response.data==null){
@@ -20,7 +22,13 @@ const FetchWeather = async ()=>{
       }
 
    } catch (error) {
-    console.log(error)
+
+     if (error.response?.status === 404) {
+      setError("Please enter a correct city name.");
+    } else {
+      setError("Something went wrong. Please try again.");
+    }
+
    }finally{
     setloading(false)
    }
@@ -92,6 +100,13 @@ useEffect(()=>{
           </button>
         </form>
       </div>
+
+{/* ///////error  message will be displayed if error has some value */}
+{Error && (
+  <p className="mb-5 rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+    {Error}
+  </p>
+)}
    
   {loading? (
 <div className="flex flex-col items-center justify-center py-16">
@@ -104,11 +119,15 @@ useEffect(()=>{
       </p>
 
     </div>
+
+    
+) : Error ? (
+  <p className="text-center text-red-500">{Error}</p>
 ) : Data ? (
   <Card Data={Data} />
 ) : null}
 
-    
+  
 
     </div>
   </div>
