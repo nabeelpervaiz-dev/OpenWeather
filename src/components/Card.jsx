@@ -18,7 +18,7 @@ const Card = ({Data}) => {
     <div className="mt-6">
       <div className="flex items-center justify-between">
         <h2 className="text-7xl font-bold tracking-tight text-gray-900 sm:text-8xl">
-          {(Data.main.temp - 273.15).toFixed(2)}
+          {(Data.main.temp).toFixed(2)}
           <span className="text-4xl font-medium text-gray-500"> °C</span>
         </h2>
 
@@ -37,7 +37,7 @@ const Card = ({Data}) => {
           {Data.weather[0].description}
         </p>
         <p className="mt-1 text-sm text-gray-500">
-          Feels like {(Data.main.feels_like - 273.15).toFixed(2)}
+          Feels like {(Data.main.feels_like ).toFixed(2)}
         </p>
       </div>
     </div>

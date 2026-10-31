@@ -9,12 +9,13 @@ function App() {
   const [loading, setloading] = useState(false)
   const [Error, setError] = useState("");
 
-const API=`https://api.openweathermap.org/data/2.5/weather?q=${City}&appid=02643a3a80ac39918bd29f3b360a0592&units=metri`
+const API=`https://api.openweathermap.org/data/2.5/weather?q=${City}&appid=02643a3a80ac39918bd29f3b360a0592&units=metric`
 const FetchWeather = async ()=>{
   setloading(true)
   setError("")
    try {
       const response = await axios.get(API);
+      setData(response.data)
     
    } catch (error) {
 
