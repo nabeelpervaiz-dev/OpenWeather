@@ -15,12 +15,7 @@ const FetchWeather = async ()=>{
   setError("")
    try {
       const response = await axios.get(API);
-      if(response.data==null){
-    alert("Please Enter a right city Name ...")
-      }else{
-       setData(response.data)
-      }
-
+    
    } catch (error) {
 
      if (error.response?.status === 404) {

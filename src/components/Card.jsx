@@ -37,7 +37,7 @@ const Card = ({Data}) => {
           {Data.weather[0].description}
         </p>
         <p className="mt-1 text-sm text-gray-500">
-          Feels like {Data.main.feels_like}
+          Feels like {(Data.main.feels_like - 273.15).toFixed(2)}
         </p>
       </div>
     </div>
